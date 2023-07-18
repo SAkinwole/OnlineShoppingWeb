@@ -16,3 +16,6 @@ html {
 body {
   margin-bottom: 60px;
 }
+.buttons-group{
+    background-color: lightgray;
+}

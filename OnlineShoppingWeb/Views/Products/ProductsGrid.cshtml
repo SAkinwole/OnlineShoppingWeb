@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "ProductsGrid";
+}
+
+<h1>ProductsGrid</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-lg-4">
+                <div class="border">
+                    <div class="product-title bg-info p-3">
+                        <h4>@product.Name</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <img class="img-fluid" src="@product.ImageUrl" />
+                        </div>
+                        <div class="col-lg">
+                            <p>@product.Description</p>
+                            <p><span class="fw-bold">Category: </span>@product.Category</p>
+                            <p><span class="fw-bold">Start Date: </span>@product.Stock</p>
+                        </div>
+                    </div>
+                    <div class="buttons-group p-3 d-flex justify-content-between">
+                        <a class="btn btn-success">Add to Cart (Price: @product.Price)</a>
+                        <a class="btn btn-outline-info">Show Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

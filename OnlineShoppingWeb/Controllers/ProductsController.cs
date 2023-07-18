@@ -18,6 +18,12 @@ namespace OnlineShoppingWeb.Controllers
             return View(allProducts);
         }
 
+        public async Task<IActionResult> ProductsGrid()
+        {
+            var allProducts = await _context.Products.ToListAsync();
+            return View(allProducts);
+        }
+
         [HttpGet]
         public IActionResult Create()
         {
