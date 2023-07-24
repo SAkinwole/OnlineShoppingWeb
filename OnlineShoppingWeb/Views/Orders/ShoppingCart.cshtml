@@ -1,0 +1,73 @@
+﻿@using OnlineShoppingWeb.ViewModel
+@model ShoppingCartVM
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="text-center">
+            <h2>Your Shopping Cart Summary</h2>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Selected Amount</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>SubTotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ShoppingCart.ShoppingCartItems)
+                {
+                    <tr>
+                        <td class="align-middle">@item.Qty</td>
+                        <td class="align-middle">@item.Product.Name</td>
+                        <td class="align-middle">@item.Product.Price.ToString("c")</td>
+                        <td class="align-middle">@((item.Qty*item.Product.Price).ToString("c"))</td>
+                        <td class="align-middle">
+                            <a class="text-danger" asp-controller="Orders" asp-action="AddProductToShoppingCart"
+                               asp-route-id="@item.Product.Id">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#008000" class="bi bi-cart" viewBox="0 0 16 16">
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                </svg>
+
+                            </a>
+                            |
+                            <a class="text-success" asp-controller="Orders" asp-action="RemoveProductFromShoppingCart"
+                               asp-route-id="@item.Product.Id">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FF0000" class="bi bi-cart" viewBox="0 0 16 16">
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"></td>
+                    <td><b>Total:</b></td>
+                    <td>
+                        @Model.ShoppingCartTotal.ToString("c")
+                    </td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="text-right">
+            <div class="btn-group">
+                <a class="btn btn-outline-primary" asp-asp-controller="Orders" asp-action="CompleteOrder">
+                    Complete Order
+                </a>
+                <div id="paypal-btn"></div>
+                <span style="padding: 5px"></span>
+                <a class="btn btn-outline-success" asp-controller="Products" asp-action="ProductsGrid">
+                    Add More Items
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -31,7 +31,7 @@ namespace OnlineShoppingWeb.Data
             return ShoppingCartItems ?? (ShoppingCartItems = _context.ShoppingCartItems.Where(x => x.ShoppingCartId ==
                         ShoppingCartId).Include(n => n.Product).ToList());
         }
-        public void AddItemToCart(Product product)
+        public void AddProductToCart(Product product)
         {
             var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Product.Id == product.Id &&
               n.ShoppingCartId == ShoppingCartId);
@@ -54,7 +54,7 @@ namespace OnlineShoppingWeb.Data
             _context.SaveChanges();
         }
 
-        public void RemoveItemFromCart(Product product)
+        public void RemoveProductFromCart(Product product)
         {
             var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Product.Id == product.Id &&
                 n.ShoppingCartId == ShoppingCartId);
@@ -75,7 +75,12 @@ namespace OnlineShoppingWeb.Data
 
         public double GetShoppingCartTotal() =>_context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId)
                                                         .Select(n => n.Product.Price * n.Qty).Sum();
-        
 
+        public async Task ClearShoppingCartAsync()
+        {
+            var items = await _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).ToListAsync();
+            _context.ShoppingCartItems.RemoveRange(items);
+            await _context.SaveChangesAsync();
+        }
     }
 }

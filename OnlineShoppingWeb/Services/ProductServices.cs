@@ -14,7 +14,24 @@ namespace OnlineShoppingWeb.Services
 
         public async Task<Product> GetProductByIdAsync(int id)
         {
-            var product = await _context.Products.FirstOrDefaultAsync(n => n.Id == id);
+            var product = await _context.Products.FindAsync(id);
+
+            return product;
+        }
+
+        public async Task<Product> GetProduct(int? id)
+        {
+
+            if (id == null || _context.Products == null)
+            {
+                return null ;
+            }
+
+            var product = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
+            if (product == null)
+            {
+                return null;
+            }
 
             return product;
         }

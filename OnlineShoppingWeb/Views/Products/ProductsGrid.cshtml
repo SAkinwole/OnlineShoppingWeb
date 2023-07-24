@@ -25,8 +25,8 @@
                         </div>
                     </div>
                     <div class="buttons-group p-3 d-flex justify-content-between">
-                        <a class="btn btn-success">Add to Cart (Price: @product.Price)</a>
-                        <a class="btn btn-outline-info">Show Details</a>
+                        <a class="btn btn-success" asp-controller="Orders" asp-action="AddProductToShoppingCart" asp-route-id="@product.Id">Add to Cart (Price: @product.Price)</a>
+                        <a class="btn btn-outline-info" asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">Show Details</a>
                     </div>
                 </div>
             </div>

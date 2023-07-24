@@ -29,14 +29,14 @@
                 <div class="col-md-12">
                     <div class="card-footer">
                         <p class="card-text">
-                            <a class="btn btn-outline-primary float-right" asp-action="Index">
+                            <a class="btn btn-outline-primary float-right" asp-controller="Products" asp-action="ProductsGrid">
                                 Back to List
                             </a>
                            @* <a class="btn btn-success text-white @((DateTime.Now > Model.Stock ? "disabled" : ""))"
                                asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id">
                                 <i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.Price.ToString("c"))
                             </a>*@
-                            <a> <i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.Price.ToString("c"))</a>
+                            <a> <i class="bi bi-cart-plus" asp-controller="Orders" asp-action="AddProductToCart"></i>  Add to Cart (Price @Model.Price.ToString("c"))</a>
                         </p>
                     </div>
                 </div>
